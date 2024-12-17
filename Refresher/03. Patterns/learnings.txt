@@ -1,0 +1,10 @@
+# Operators (Instead of creating txt files you can learn to create MD files)
+
+1. In print operation, if we use '+' operator for both addition and concatenation,
+then it will follow L -> R convention
+ System.out.print(j + 1 + " ");
+
+2. In Arithetic opertaions it is know fact, that it will follow order of importance
+if ( j+1 % 2 == 0 ), here first 1 % 2 will be performed first 
+
+
