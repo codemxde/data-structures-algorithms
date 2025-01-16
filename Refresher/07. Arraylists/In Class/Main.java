@@ -172,33 +172,33 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         
         // # Q1. Keep taking integer input untill negative input is provided.
-        // System.out.println(storeInputRating(sc) + "\n------------------------------------------------------------");
+        System.out.println(storeInputRating(sc) + "\n------------------------------------------------------------");
 
         // $ Declaring re-usable lists
         ArrayList<Integer> list = new ArrayList<>();
         ArrayList<ArrayList<Integer>> list2d = new ArrayList<>();
 
         // # Exercise: Take Arraylist as input and print contents
-        // readArrayList("Exercise: Take Arraylist as input and print contents", list, sc);
-        // printList(list);
+        readArrayList("Exercise: Take Arraylist as input and print contents", list, sc);
+        printList(list);
 
         // # Q2. Given Arraylist as input, return an Arraylist of the multiples of 5 or 7.
-        // readArrayList("Q2. Given Arraylist as input, return an Arraylist of the multiples of 5 or 7.", list, sc);
-        // checkMultiplesInList(list, sc);
+        readArrayList("Q2. Given Arraylist as input, return an Arraylist of the multiples of 5 or 7.", list, sc);
+        checkMultiplesInList(list, sc);
 
         // # Q3. Given two integers A, B. Return Arraylist containing first B multiples of A
-        // multiplesOfIntegerList(list, sc);
+        multiplesOfIntegerList(list, sc);
 
         // # Exercise: Taking two dimensional ArrayList as input
-        // readtwoDimensionalList(list2d, sc);
+        readtwoDimensionalList(list2d, sc);
 
         // # Exercise: Taking Non-Matrix Input using ArrayList
-        // readNonMatrixWithList("Exercise: Taking Non-Matrix Input using ArrayList", list2d, sc); // what's with the weird ass names 🥹
-        // printNestedList(list2d);
+        readNonMatrixWithList("Exercise: Taking Non-Matrix Input using ArrayList", list2d, sc); // what's with the weird ass names 🥹
+        printNestedList(list2d);
 
         // # Q4. Given 2D ArrayList as input, print it line by line
-        // readNonMatrixWithList("Q4. Given 2D ArrayList as input, print it line by line", list2d, sc);
-        // printListLineByLine(list2d);
+        readNonMatrixWithList("Q4. Given 2D ArrayList as input, print it line by line", list2d, sc);
+        printListLineByLine(list2d);
 
         // # Q5. Given N as input, return numeric staircase as ArrayList
         printNumericStaircaseList(list2d, sc);
