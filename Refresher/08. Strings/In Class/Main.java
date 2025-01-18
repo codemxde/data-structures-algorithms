@@ -93,7 +93,7 @@ public class Main {
             end--;
         }
 
-        System.out.println(str + (isPalindrome ? " is a palindrome" : "is not a palindrome"));
+        System.out.println(str + (isPalindrome ? " is a palindrome" : " is not a palindrome"));
         printEndOfSegment();
     }
     
