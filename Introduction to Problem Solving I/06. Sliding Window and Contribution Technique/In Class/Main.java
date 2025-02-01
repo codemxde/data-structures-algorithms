@@ -135,6 +135,155 @@ public class Main {
 
         endOfSegment();
     }
+
+    public static void subarraysWithLengthK(Scanner sc) {
+        // # Observation (refer lecture notes)
+        // * Say N = 6
+        // * Number of subarrays with length = 1 → 6 or [N]
+        // * Number of subarrays with length = 2 → 5 or [N - 1]
+        // * Number of subarrays with length = 3 → 4 or [N - 2]
+        // * Number of subarrays with length = 4 → 3 or [N - 3]
+        // * Number of subarrays with length = 5 → 2 or [N - 4]
+        // * Number of subarrays with length = 6 → 1 or [N - 5]
+        
+        // # Or we can say
+        // * Number of subarrays with length = K → [N - K + 1]
+
+        System.out.println("Q2. Number of subarrays with length K\n");
+
+        System.out.print("enter length of array: ");
+        int N = sc.nextInt();
+
+        System.out.print("enter subarray length: ");
+        int K = sc.nextInt();
+
+        System.out.println("\nnumber of subarrays with length " + K + " → " + (N - K + 1));
+        endOfSegment();
+    }
+
+    public static void subarrayIndexesOfLengthK(int[] arr, Scanner sc) {
+        // # Approach
+        // * Maintain two pointer indexes, 'si' and 'ei'
+        // * initialise 'si' with '0' and 'ei' with 'K-1'
+        // * What we have now created is a 'window' or subarray
+        // * which encompasses 'K' elemnts.
+        // * Next, we 'slide' this window , by incrementing both
+        // * 'si' and 'ei' by '1' untill the end of the array is reached.
+        // * By doing so, we would have arrived at at the start and
+        // * end indexes of all the subarrays with length 'K'
+
+        // # Time and Space
+        // * T.C. - O(N-K+1), whhich is equal to the no of subarrays with length 'K'
+        // * S.C. - O(1)
+
+        System.out.println("Q3. Print si and ei of every subarray of length k.\n");
+        
+        // * read 'K'
+        System.out.print("enter length, to find all start and end indexes: ");
+        int K = sc.nextInt();
+        
+        // * handling edge case
+        if (K > arr.length) {
+            System.out.println("no such indexes exist for given length");
+        }
+        
+        // * creating a window of length 'K'
+        int si = 0;
+        int ei = K - 1;
+
+        // * printing all 'si' and 'ei' for all subarrays with length 'K'
+        while (ei < arr.length) {
+            System.out.println("start and end indexes for subarray " + (si + 1) + ": " + "(" + si + "," + ei + ")");
+            si++;
+            ei++;
+        }
+        endOfSegment();
+    }
+
+    public static void prefixSumApproach(int[] arr, int K) {
+        // # Approach
+        // * We already know the start and end indexes of all subarrays
+        // * with length 'K'. We just need to 'carry forward' the maximum sum
+        // * in all of the 'windows'
+        // * To calculate each subarray sum between 'si' and 'ei' we need
+        // * to first construct a prefix sum array
+
+        // # Time and Space
+        // * T.C - O(N)
+        // * S.C - O(N), due to prefix sum array
+
+        System.out.println("\n1. Prefix Sum Approach");
+
+        // * create prefix sum array
+        int[] pSum = createPrefixSum(arr);
+
+        // * finding maximum sum
+        int maxSum = pSum[K-1];
+        int si = 1;
+        int ei = K;
+
+        while (ei < arr.length) {
+            if (pSum[ei] - pSum[si - 1] > maxSum) {
+                maxSum = pSum[ei] - pSum[si - 1];
+            }
+            si++;
+            ei++;
+        }
+        System.out.println("maximum sum of subarray with length K = " + maxSum);
+    }
+
+    public static void slidingWindowApproach(int[] arr, int K) {
+        // # Approach
+        // * Calculate the sum of the first 'K' elements
+        // * configure a sliding window with length 'K'
+        // * as you keep on sliding, delete the value of the last 'si'
+        // * and add the value of new 'ei' elements to get updated 'sum'
+        // * value for 'current window'
+        // * carry forward the maximum sum for all the 'windows'
+
+        // # Time and Space
+        // * T.C - O(N), what if K = 1, whole array iteration required
+        // * S.C - O(1), improvement from O(N) from prefix-sum technique
+
+        System.out.println("\n2. Sliding Window Approach");
+
+        // * calculating sum of first 'K' elements
+        int windowSum = 0;
+        for (int i = 0; i < K; i++) {
+            windowSum += arr[i];
+        }
+
+        // * configuring sliding window
+        int si = 1;
+        int ei = K;
+        int maxSum = windowSum;
+
+        while (ei < arr.length) {
+            windowSum = windowSum - arr[si - 1] + arr[ei];
+            if (windowSum > maxSum) {
+                maxSum = windowSum;
+            }
+            si++;
+            ei++;
+        }
+        System.out.println("maximum sum of subarray with length K = " + maxSum);
+    }
+
+    public static void maxSubarraySumOfLengthK(int[] arr, Scanner sc) {
+        System.out.println("Q4. Given arr[N]. Print maximum subarray sum of subarray\nwith length K\n");
+
+        // * read input for 'K'
+        System.out.print("enter subarray length: ");
+        int K = sc.nextInt();
+
+        // # 1. Prefix Sum Approach
+        prefixSumApproach(arr, K);
+
+        // # 2. Sliding Widow Approach
+        slidingWindowApproach(arr, K);
+
+        endOfSegment();
+    }
     
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -142,7 +291,16 @@ public class Main {
         // * iniialize universal array
         int[] arr = readArray(sc);
 
-        // # Q1. Given arr[ N ]. Find sum of all Subarray sums. (Google, Meta)
+        // # Q1. Given arr[N]. Find sum of all Subarray sums. (Google, Meta)
         sumOfAllSubarraySums(arr, sc);
+
+        // # Q2. Number of subarrays with length K
+        subarraysWithLengthK(sc);
+
+        // # Q3. Print si and ei of every subarray of length k.
+        subarrayIndexesOfLengthK(arr, sc);
+
+        // # Q4. Given arr[N]. Print maximum subarray sum of subarray with length k
+        maxSubarraySumOfLengthK(arr, sc);
     }
 }
